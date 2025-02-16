@@ -1,6 +1,25 @@
 {
     "version": "0.2.0",
     "configurations": [
+        //uvicorn reload
+        // main is in src/main.py
+        {
+            "name": "Python: Uvicorn",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "src.main:app",
+                "--host",
+                "0.0.0.0",
+                "--port",
+                "8888",
+                "--reload"
+            ],
+            "jinja": true,
+            "envFile": "${workspaceFolder}/backend/credentials.env",
+            "cwd": "${workspaceFolder}/backend"
+        }
         // o autogenerate serve basicamente pra comparar o estado atual do banco com o estado
         // atual da base declarada no código e gerar um arquivo de migração
         {
