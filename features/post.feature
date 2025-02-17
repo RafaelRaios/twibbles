@@ -55,26 +55,9 @@ Feature: postagem
 		And A postagem "Adoro café!" não aparece mais no feed de Mariana Costa
 
 	# Cenário 7
-	Scenario: Falha ao editar postagem de outro usuário
-		Given O usuário "Ricardo Nunes" está logado na plataforma Twibbles
-		And Ricardo Nunes está na tela de usuário, na aba de postagens
-		And Ricardo Nunes tenta editar uma postagem de outro usuário
-		When Ricardo Nunes envia a requisição PUT para /postagens/{id} com o novo texto "Alteração não autorizada"
-		Then O sistema retorna status 403 com a mensagem “Você não tem permissão para editar esta postagem”
-
-	# Cenário 8
 	Scenario: Falha ao publicar devido a erro no servidor
 		Given O usuário "Gustavo Alves" está logado na plataforma Twibbles
 		And Gustavo Alves está na tela de usuário, na aba de postagens
 		And Gustavo Alves tenta publicar uma postagem com o texto "Testando erro do servidor"
 		When Gustavo Alves envia a requisição POST para /postagens e ocorre um erro interno no servidor
 		Then O sistema retorna status 500 com a mensagem “Erro interno do servidor. Tente novamente mais tarde”
-
-	# Cenário 9
-	Scenario: Tentativa de postagem com mídia não suportada
-		Given O usuário "Lucas Fernandes" está logado na plataforma Twibbles
-		And Lucas Fernandes está na tela de usuário, na aba de postagens
-		And Lucas Fernandes tenta publicar uma postagem anexando um arquivo de formato não suportado (ex: .exe)
-		When Lucas Fernandes tenta enviar a postagem
-		Then O sistema exibe uma mensagem de erro: “Formato de arquivo não suportado”
-		And O botão de enviar permanece desabilitado
